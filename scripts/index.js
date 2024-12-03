@@ -25,8 +25,6 @@ function createButtonElement(bookId) {
   return container;
 }
 
-console.log(library);
-
 library.forEach((book) => {
   const newBookCard = document.createElement("div");
   newBookCard.setAttribute("class", "book-card");
@@ -58,8 +56,6 @@ library.forEach((book) => {
   document.querySelector(".books-container").appendChild(newBookCard);
   console.log(document.querySelector(".book-container"));
 });
-
-console.log(library);
 
 document.querySelectorAll(".book-card > a").forEach((anchor) => {
   anchor.addEventListener("click", (event) => {

@@ -21,13 +21,23 @@ function sortObjectsByKey(list, key, ascending = true) {
   });
 }
 
+export function getBook(bookId) {
+  for (const book of library) {
+    if (book.bookId === bookId) {
+      return book;
+    }
+  }
+  return null;
+}
+
 export function getContent(bookId, chapterId) {
+  let item;
   library.forEach((book) => {
     if (book.bookId === bookId) {
       book.chapters.forEach((chapter) => {
-        if (chapter.id === chapterId) {
-          return {
-            chapter_title: chapter.title,
+        if (chapter.id == chapterId) {
+          item = {
+            title: chapter.title,
             content: chapter.content
           };
         }
@@ -35,7 +45,7 @@ export function getContent(bookId, chapterId) {
     }
   });
 
-  return undefined;
+  return item;
 }
 
 export function removeBook(bookId) {
