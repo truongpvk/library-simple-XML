@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang Đọc Sách</title>
+    <link rel="stylesheet" href="../style/book.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+
+    <style>
+      .next-previous-button-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+        bottom: 50px;
+      }
+
+      .next-previous-button-container > button {
+        border: black 1px solid;
+        padding: 15px;
+        font-size: 15px;
+      }
+
+      .next-previous-button-container > button:hover {
+        background-color: rgb(111, 111, 248);
+        color: whitesmoke;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="title">
+        <h1 class="book-title">Tôi thấy hoa vàng trên cỏ xanh</h1>
+        <h2 class="chapter-title">Chương 1: Mở đầu</h2>
+      </div>
+    </header>
+
+    <main>
+      <div class="content">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus
+          cupiditate quis, corporis modi ad nesciunt aliquam iusto reiciendis,
+          adipisci voluptatibus laudantium porro, unde quos pariatur iste
+          reprehenderit molestias est dolorum!
+        </p>
+      </div>
+
+      <div class="next-previous-button-container">
+        <button class="previous-chapter">Chương trước</button>
+        <button class="next-chapter">Chương sau</button>
+      </div>
+    </main>
+
+    <script type="module" src="../scripts/reading.js"></script>
+  </body>
+</html>

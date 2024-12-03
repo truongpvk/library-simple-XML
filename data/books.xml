@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<library xmlns="http://www.w3schools.com"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.w3schools.com books.xsd">   
+  <book datepublic="12-01-2023" bookId="A001">
+    <title>Introduction to XML</title>
+    <other-title>XML Basics and Beyond</other-title>
+    <authors>
+      <author>John Doe</author>
+      <author>Jane Smith</author>
+    </authors>
+    <description>This book provides an introduction to XML concepts and examples.</description>
+    <chapters>
+      <chapter id="1" datepublic="12-01-2023">
+        <chapter-title>Getting Started</chapter-title>
+        <content>This chapter introduces the basics of XML.</content>
+      </chapter>
+      <chapter id="2" datepublic="12-02-2023">
+        <chapter-title>Advanced Topics</chapter-title>
+        <content>This chapter dives deeper into XML schema and validation.</content>
+      </chapter>
+    </chapters>
+  </book>
+</library>

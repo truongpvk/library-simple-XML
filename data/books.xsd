@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="library">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="book">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="title"/>
+              <xs:element type="xs:string" name="other-title"/>
+              <xs:element name="authors">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="author" maxOccurs="unbounded" minOccurs="0"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element type="xs:string" name="description"/>
+              <xs:element name="chapters">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="chapter" maxOccurs="unbounded" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element type="xs:string" name="chapter-title"/>
+                          <xs:element type="xs:string" name="content"/>
+                        </xs:sequence>
+                        <xs:attribute type="xs:byte" name="id" use="required"/>
+                        <xs:attribute type="dateFormat" name="datepublic" use="required"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="dateFormat" name="datepublic" use="required"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- Định nghĩa kiểu dữ liệu dateFormat với định dạng mm-dd-yyyy -->
+  <xs:simpleType name="dateFormat">
+    <xs:restriction base="xs:string">
+      <xs:pattern value="(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])-\d{4}"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

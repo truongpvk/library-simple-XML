@@ -1,0 +1,46 @@
+header {
+  text-align: center; /* Căn giữa nội dung trong header */
+  margin-bottom: 20px; /* Khoảng cách dưới header */
+  margin-top: 100px;
+}
+
+.title {
+  display: inline-block; /* Để căn giữa nội dung bên trong */
+}
+
+.book-title {
+  font-size: 32px; /* Kích thước chữ cho tiêu đề sách */
+  margin: 0; /* Bỏ khoảng cách mặc định */
+}
+
+.chapter-title {
+  font-size: 25px; /* Kích thước chữ cho tiêu đề chương */
+  margin: 0; /* Bỏ khoảng cách mặc định */
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 25px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: justify;
+}
+
+.content {
+  width: 70%;
+}
+
+@media (max-width: 600px) {
+  .content {
+    width: 85%;
+  }
+}
