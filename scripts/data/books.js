@@ -4,7 +4,7 @@ if (!library) {
   library = [];
 }
 
-function setLibraryToStorage() {
+export function setLibraryToStorage() {
   localStorage.setItem("library", JSON.stringify(library));
 }
 
@@ -36,6 +36,10 @@ export function getContent(bookId, chapterId) {
   });
 
   return undefined;
+}
+
+export function removeBook(bookId) {
+  
 }
 
 // Lấy dữ liệu từ xml

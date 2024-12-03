@@ -1,23 +1,24 @@
-import { library } from "./books.js";
+import { library, removeBook, setLibraryToStorage } from "./data/books.js";
 
-function createButtonElement() {
+function createButtonElement(bookId) {
   const button_class = "btn hover:shadow-lg";
   const button_class_2 = "btn hover:bg-red-600 hover:text-white";
 
   const container = document.createElement("div");
   container.setAttribute("class", "button-container");
+  container.setAttribute("data-book-id", bookId);
     const listBtn = document.createElement("button");
-    listBtn.setAttribute("class", button_class);
+    listBtn.setAttribute("class", button_class + " list-chapter-btn");
     listBtn.textContent = "Danh sách chương";
     container.appendChild(listBtn);
 
     const editBtn = document.createElement("button");
-    editBtn.setAttribute("class", button_class);
+    editBtn.setAttribute("class", button_class + " edit-book-btn");
     editBtn.textContent = "Chỉnh sửa";
     container.appendChild(editBtn);
 
     const removeBtn = document.createElement("button");
-    removeBtn.setAttribute("class", button_class_2);
+    removeBtn.setAttribute("class", button_class_2 + " remove-book-btn");
     removeBtn.textContent = "Xóa";
     container.appendChild(removeBtn);
 
@@ -57,3 +58,23 @@ library.forEach((book) => {
   document.querySelector(".books-container").appendChild(newBookCard);
   console.log(document.querySelector(".book-container"));
 });
+
+console.log(library);
+
+document.querySelectorAll(".book-card > a").forEach((anchor) => {
+  anchor.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    const bookId = anchor.dataset.bookId;
+    localStorage.setItem("bookForInfo", JSON.stringify(bookId));
+    window.location.href = "../templates/info-book.html";
+  })
+});
+
+document.querySelectorAll(".remove-book-btn").forEach((button) => {
+  button.addEventListener("click", (event) => {
+    const bookId = button.parentElement.dataset.bookId;
+    removeBook(bookId);
+    location.reload();
+  })
+})
