@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thêm sách mới</title>
+    <link rel="stylesheet" href="../style/addNewBook.css">
+  </head>
+  <body>
+    <a href="index.html" class="fixed-button home-button">Trang Chủ</a>
+    <div class="container">
+      <h1>Nhập Thông Tin Sách Mới</h1>
+      <form id="bookForm">
+        <label for="title">Tiêu đề:</label>
+        <input placeholder="Tiêu đề sách" type="text" id="title" name="title" required />
+
+        <label for="subtitle">Tiêu đề khác:</label>
+        <input placeholder="Tiêu đề khác của sách, nếu không có thì để trống" type="text" id="subtitle" name="subtitle" />
+
+        <label for="author">Tác giả:</label>
+        <input placeholder="Nếu nhiều tác giả thì cách nhau bằng dấu ','" type="text" id="author" name="author" required />
+
+        <label for="description">Giới thiệu:</label>
+        <textarea
+          id="description"
+          name="description"
+          rows="4"
+          required
+        ></textarea>
+
+        <button>Thêm</button>
+      </form>
+      <div id="result"></div>
+    </div>
+
+    <script type="module" src="../scripts/addNewBook.js"></script>
+  </body>
+</html>

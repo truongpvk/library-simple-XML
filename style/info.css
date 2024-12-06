@@ -1,7 +1,6 @@
-.home-button {
+.fixed-button {
   position: fixed; /* Đặt vị trí cố định */
-  top: 20px; /* Khoảng cách từ trên xuống */
-  left: 20px; /* Khoảng cách từ bên trái */
+  
   background-color: #007bff; /* Màu nền */
   color: white; /* Màu chữ */
   padding: 10px 15px; /* Padding cho nút */
@@ -10,8 +9,18 @@
   transition: background-color 0.3s; /* Hiệu ứng chuyển màu */
 }
 
-.home-button:hover {
+.fixed-button:hover {
   background-color: #0056b3; /* Màu nền khi hover */
+}
+
+.home-button {
+  top: 20px;
+  left: 20px;
+}
+
+.new-chapter-button {
+  top: 20px;
+  right: 20px;
 }
 
 header {
