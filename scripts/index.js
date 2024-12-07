@@ -1,4 +1,13 @@
-import { library, updateLibrary, removeBook } from "./data/books.js";
+import { 
+  allBooks, 
+  library, 
+  removeBook, 
+  searchBookList, 
+  setLibraryToStorage,
+  sortObjectByString, 
+  sortObjectByDate,
+  sortObjectByUpdateDate
+} from "./data/books.js";
 
 function createButtonElement(bookId) {
   const button_class = "btn hover:shadow-lg";
@@ -44,37 +53,37 @@ function createNewBookCard(book) {
   const newBookCard = document.createElement("div");
   newBookCard.setAttribute("class", "book-card");
 
-    const newAnchor = document.createElement("a");
-    newAnchor.setAttribute("href", "#");
-    newAnchor.setAttribute("data-book-id", book.bookId);
+  const newAnchor = document.createElement("a");
+  newAnchor.setAttribute("href", "#");
+  newAnchor.setAttribute("data-book-id", book.bookId);
 
-      const newTitle = document.createElement("h2");
-      newTitle.setAttribute("class", "book-title");
-      newTitle.innerHTML = `${book.title} (<i>${book.other_title}</i>)`;
-      newAnchor.appendChild(newTitle);
+  const newTitle = document.createElement("h2");
+  newTitle.setAttribute("class", "book-title");
+  newTitle.innerHTML = `${book.title} (<i>${book.other_title}</i>)`;
+  newAnchor.appendChild(newTitle);
 
-      const newAuthorList = document.createElement("div");
-      newAuthorList.setAttribute("class", "authors flex space-x-5");
-      book.authors.forEach((author) => {
-        let newAuthor = document.createElement("h4");
-        newAuthor.setAttribute("class", "book-author");
-        newAuthor.textContent = author;
-        newAuthorList.appendChild(newAuthor);
-      });
-      newAnchor.append(newAuthorList);
+  const newAuthorList = document.createElement("div");
+  newAuthorList.setAttribute("class", "authors flex space-x-5");
+  book.authors.forEach((author) => {
+    let newAuthor = document.createElement("h4");
+    newAuthor.setAttribute("class", "book-author");
+    newAuthor.textContent = author;
+    newAuthorList.appendChild(newAuthor);
+  });
+  newAnchor.append(newAuthorList);
 
-      const description = document.createElement("p");
-      description.setAttribute("class", "book-description");
-      description.textContent = book.description;
-      newAnchor.appendChild(description);
+  const description = document.createElement("p");
+  description.setAttribute("class", "book-description");
+  description.textContent = book.description;
+  newAnchor.appendChild(description);
 
-    newAnchor.addEventListener("click", (event) => {
-      event.preventDefault();
+  newAnchor.addEventListener("click", (event) => {
+    event.preventDefault();
 
-      const bookId = newAnchor.dataset.bookId;
-      localStorage.setItem("bookForInfo", JSON.stringify(bookId));
-      window.location.href = "../templates/info-book.html";
-    })
+    const bookId = newAnchor.dataset.bookId;
+    localStorage.setItem("bookForInfo", JSON.stringify(bookId));
+    window.location.href = "../templates/info-book.html";
+  })
 
   newBookCard.appendChild(newAnchor);
   newBookCard.appendChild(createButtonElement(book.bookId));
@@ -90,8 +99,9 @@ export function loadPage() {
       container.removeChild(container.firstChild);
     }
   }
-  
-  console.log("Library trước khi hiển thị: " + library)
+
+  console.log("Library trước khi hiển thị: ");
+  console.log(library);
 
   if (library) {
     library.forEach((book) => {
@@ -100,6 +110,38 @@ export function loadPage() {
     });
   }
 }
+
+// Tìm kiếm
+document.getElementById("search-input").addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    let searchString = event.target.value;
+    let bookList = searchBookList(searchString);
+
+    setLibraryToStorage(bookList);
+    loadPage();
+  }
+})
+
+// Sắp xếp
+document.getElementById("filter-dropdown").addEventListener("change", (event) => {
+  const selected = event.target.value;
+  if (selected == 1) {
+    const sortList = sortObjectByString(library);
+    setLibraryToStorage(sortList);
+    loadPage();
+  } else if (selected == 2) {
+    const sortList = sortObjectByDate(library);
+    setLibraryToStorage(sortList);
+    loadPage();
+  } else if (selected == 3) {
+    const sortList = sortObjectByUpdateDate(library);
+    setLibraryToStorage(sortList);
+    loadPage();
+  } else {
+    setLibraryToStorage(allBooks);
+    loadPage();
+  }
+})
 
 loadPage();
 

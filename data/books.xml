@@ -1,3 +1,3 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version='1.0' encoding='utf-8'?>
 <library xmlns="http://www.w3schools.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3schools.com books.xsd">
-	</library>
+	<book bookId="7e4e6abb-1da0-41c3-9b13-6d408787dea9" datepublic="12-07-2024"><title>Tạm Biệt</title><other-title>Goodbye</other-title><authors><author>Nhiều tác giả</author></authors><description>no</description><chapters/></book><book bookId="d8053c15-d4dd-4616-bd2b-ee7e9d0b1828" datepublic="12-07-2024"><title>Xin chào Việt Nam</title><other-title>Hello Vietnam</other-title><authors><author>Nhiều tác giả</author></authors><description>No</description><chapters/></book><book bookId="0bcf89d2-68a2-47ab-aea0-f12ad6537c68" datepublic="12-07-2024"><title>Conan</title><other-title>Thám tử lừng danh Conan</other-title><authors><author>Edogawa</author></authors><description>No</description><chapters/></book></library>

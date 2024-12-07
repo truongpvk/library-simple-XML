@@ -1,4 +1,10 @@
+export let allBooks = updateBook();
 export let library = JSON.parse(localStorage.getItem("library"));
+
+function updateBook() {
+  updateLibrary();
+  return JSON.parse(localStorage.getItem("library"));
+}
 
 if (!library) {
   library = [];
@@ -9,10 +15,11 @@ export function setLibraryToStorage(books) {
     console.log("Khong hop le khi luu vao Local");
   } else {
     localStorage.setItem("library", JSON.stringify(books));
+    library = JSON.parse(localStorage.getItem("library"));
   }
 }
 
-function sortObjectsByKey(list, key, ascending = true) {
+export function sortObjectsByKey(list, key, ascending = true) {
   return list.sort((a, b) => {
     // Lấy giá trị của thuộc tính
     const valA = a[key];
@@ -25,6 +32,63 @@ function sortObjectsByKey(list, key, ascending = true) {
   });
 }
 
+export function sortObjectByString(list, ascending = true) {
+  return list.sort((a, b) => {
+    return ascending ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
+  });
+}
+
+export function sortObjectByDate (list, ascending = true) {
+  return list.sort((a, b) => {
+    const dateA = a.datePublic.split("-").reverse().join("-");
+    const dateB = b.datePublic.split("-").reverse().join("-");
+
+    return ascending ? new Date(dateA) - new Date(dateB) : new Date(dateB) - new Date(dateA);
+  })
+}
+
+function getNewestUpdateDate(bookId) {    
+  library.forEach((book) => {
+    if (book.bookId === bookId) {
+      const chapters = sortObjectByDate(book.chapters, false);
+      return chapters[0].datePublic;
+    }
+  });
+}
+
+export function sortObjectByUpdateDate(list, ascending = true) {
+  return list.sort((a, b) => {
+    const dateA = getNewestUpdateDate(a.bookId);
+    const dateB = getNewestUpdateDate(b.bookId);
+
+    return ascending ? new Date(dateA) - new Date(dateB) : new Date(dateB) - new Date(dateA);
+  })
+}
+
+export function searchBookList(searchString) {
+  let bookList = []
+
+  if (!searchString) {
+    setLibraryToStorage(allBooks);
+    return allBooks;
+  }
+
+  allBooks.forEach((book) => {
+    console.log("Checking...");
+    if (book.title.toLowerCase().includes(searchString.toLowerCase()) || book.other_title.toLowerCase().includes(searchString.toLowerCase())) {
+      bookList.push(book);
+    }
+  });
+  console.log("Danh sách tìm được: ");
+  console.log(bookList);
+  if (bookList.length < 1) {
+    alert("Không có nội dung cần tìm kiếm!");
+    setLibraryToStorage(allBooks);
+    return allBooks;
+  }
+  return bookList;
+}
+
 export function getBook(bookId) {
   for (const book of library) {
     if (book.bookId === bookId) {
@@ -32,14 +96,6 @@ export function getBook(bookId) {
     }
   }
   return null;
-}
-
-export function getChapters(bookId) {
-  const book = getBook(bookId);
-  if (!book) {
-    return null;
-  }
-  return book.chapters;
 }
 
 export function getContent(bookId, chapterId) {
@@ -88,7 +144,6 @@ export function updateLibrary() {
     .then(xmlString => {
       const xmlDocuments = new DOMParser().parseFromString(xmlString, "text/xml");
       const books = xmlDocuments.querySelectorAll("book");
-      console.log("Thẻ book đọc được từ XML: " + books);
 
       books.forEach((book) => {
         let bookId = book.getAttribute("bookId");
