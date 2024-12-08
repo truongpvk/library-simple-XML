@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thêm chương mới</title>
+  <link rel="stylesheet" href="../style/newChapter.css">
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-button">Quay về trang chủ</a>
+    <h1>Thêm Chương Mới</h1>
+    <form id="add-chapter-form">
+        <div class="form-group">
+            <label for="title">Tiêu đề chương:</label>
+            <input type="text" id="title" name="title" required>
+        </div>
+        <div class="form-group">
+            <label for="content">Nội dung chương:</label>
+            <textarea id="content" name="content" rows="10" required></textarea>
+        </div>
+        <button class="submit-button">Thêm Chương Mới</button>
+    </form>
+</div>
+
+<script type="module" src="../scripts/addNewChapter.js"></script>
+</body>
+</html>

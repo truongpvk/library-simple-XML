@@ -30,6 +30,7 @@
                       </xs:complexType>
                     </xs:element>
                   </xs:sequence>
+                  <xs:attribute type="xs:byte" name="total"></xs:attribute>
                 </xs:complexType>
               </xs:element>
             </xs:sequence>

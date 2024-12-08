@@ -9,6 +9,9 @@ CORS(app=app)
 path = 'D:\\Codespace-Learning\\Learning_School\\HePhanTan\\XML\\data\\books.xml'
 ns = {'ns': 'http://www.w3schools.com'}
 
+tree = etree.parse(path)
+
+
 @app.route('/delete', methods=['POST'])
 def delete_element():
   data = request.json
@@ -18,11 +21,8 @@ def delete_element():
     return jsonify({'err': 'ID is required'})
 
   try:
-    tree = etree.parse(path)
     root = tree.getroot()
-    print(root)
     element_to_remove = root.xpath(f"//ns:book[@bookId='{id}']", namespaces=ns)
-    print(element_to_remove)
     if not element_to_remove:
       return jsonify({'error': 'Element not found'})
         
@@ -48,7 +48,6 @@ def addNewBook():
     chapters = []
 
     try:
-      tree = etree.parse(path)
       root = tree.getroot()
 
       # Tạo tag book
@@ -74,7 +73,7 @@ def addNewBook():
       book_tag.append(description_tag)
 
       # Chương
-      chapters_tag = etree.Element("chapters")
+      chapters_tag = etree.Element("chapters", attrib={"total":"0"})
       book_tag.append(chapters_tag)
 
       root.append(book_tag)
@@ -86,6 +85,86 @@ def addNewBook():
       return jsonify({'Status': 'Data was updated!'})
     except Exception as e:
       return jsonify({'Error': e})
+
+@app.route('/updateBook', methods=['POST'])
+def updateBook():
+  data = request.json
+  id = data.get("bookId")
+  title = data.get("title")
+  other_title = data.get("other_title")
+  authors = data.get("authors")
+  description = data.get("description")
+
+  try:
+    root = tree.getroot()
+    element = root.xpath(f"//ns:book[@bookId='{id}']", namespaces=ns)[0]
+    if element is None:
+      print("Không tìm thấy sách này")
+      return jsonify({"Error": "Không tìm thấy sách này"})
+    
+    element.find("ns:title", namespaces=ns).text = title
+    element.find("ns:other-title", namespaces=ns).text = other_title
+    element.find("ns:description", namespaces=ns).text = description
+    authors_tag = element.find("ns:authors", namespaces=ns)
+    authors_tag.clear()
+    
+    for author in authors:
+      author_tag = etree.Element("author")
+      author_tag.text = author.strip()
+      authors_tag.append(author_tag)
+
+    # Ghi lại file XML
+    with open(path, 'wb') as file:
+      file.write(etree.tostring(tree, pretty_print=True, encoding='utf-8', xml_declaration=True))
+      
+    return jsonify({"status": "Update Successfully"})
+  except Exception as e:
+    print("Không thể cập nhật")
+    return jsonify({"Error": "Cannot update"})
+
+@app.route('/addNewChapter', methods=["POST"])
+def addNewChapter():
+  data = request.json
+  id = data.get("bookId")
+  title = data.get("title")
+  content = data.get("content")
+
+  try:
+    root = tree.getroot()
+    element = root.xpath(f"//ns:book[@bookId='{id}']", namespaces=ns)[0]
+
+    chapters = element.xpath("ns:chapters", namespaces=ns)
+    if chapters is None:
+      print("Không tìm thấy tag chapters")
+      return jsonify({"Error": "Cannot find chapters tag"})
+    
+    total_chapter = int(chapters[0].get('total')) + 1
+    print(type(total_chapter))
+
+    chapter = etree.Element("chapter", attrib={"id": str(total_chapter), "datepublic": datetime.now().strftime("%m-%d-%Y")})
+
+    chapter_title = etree.Element("chapter-title")
+    chapter_title.text = title
+    chapter.append(chapter_title)
+
+    chapter_content = etree.Element("content")
+    chapter_content.text = content
+    chapter.append(chapter_content)
+
+
+    chapters[0].attrib['total'] = str(total_chapter)
+    chapters[0].append(chapter)
+
+    
+    # Ghi lại file XML
+    with open(path, 'wb') as file:
+      file.write(etree.tostring(tree, pretty_print=True, encoding='utf-8', xml_declaration=True))
+    
+    return jsonify({"status": "Create new chapter Successfully"})
+  except Exception as e:
+    print(e)
+    return jsonify({"Error": "Cannot execute because"})
+
 
 if __name__ == '__main__':
     app.run(debug=True)

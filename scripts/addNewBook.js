@@ -35,10 +35,12 @@ function addNewBook(title, other_title, authors, description) {
   })
     .then(response => {
       updateLibrary();
+      window.location.href = "../templates/index.html";
       return response.text;
     })
     .then(data => console.log(data))
     .catch(error => console.log(error));
+  updateLibrary();
   window.location.href = "../templates/index.html";
 
 }

@@ -1,3 +1,70 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="utf-8"?>
 <library xmlns="http://www.w3schools.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3schools.com books.xsd">
-	<book bookId="7e4e6abb-1da0-41c3-9b13-6d408787dea9" datepublic="12-07-2024"><title>Tạm Biệt</title><other-title>Goodbye</other-title><authors><author>Nhiều tác giả</author></authors><description>no</description><chapters/></book><book bookId="d8053c15-d4dd-4616-bd2b-ee7e9d0b1828" datepublic="12-07-2024"><title>Xin chào Việt Nam</title><other-title>Hello Vietnam</other-title><authors><author>Nhiều tác giả</author></authors><description>No</description><chapters/></book><book bookId="0bcf89d2-68a2-47ab-aea0-f12ad6537c68" datepublic="12-07-2024"><title>Conan</title><other-title>Thám tử lừng danh Conan</other-title><authors><author>Edogawa</author></authors><description>No</description><chapters/></book></library>
+	<book bookId="d8053c15-d4dd-4616-bd2b-ee7e9d0b1828" datepublic="12-07-2024">
+		<title>
+			Xin chào Việt Nam 222
+		</title>
+		<other-title>
+			Hello Vietnam
+		</other-title>
+		<authors>
+			<author>
+				Nhiều tác giả
+			</author>
+		</authors>
+		<description>
+			Nonan
+		</description>
+		<chapters total="4">
+			<chapter id="1" datepublic="12-08-2024">
+				<chapter-title>
+					Goodbye
+				</chapter-title>
+				<content>
+					Xin chào
+				</content>
+			</chapter>
+			<chapter id="2" datepublic="12-08-2024">
+				<chapter-title>
+					Hello
+				</chapter-title>
+				<content>
+					Xin chào
+				</content>
+			</chapter>
+			<chapter id="3" datepublic="12-08-2024">
+				<chapter-title>
+					Miss You
+				</chapter-title>
+				<content>
+					Nhớ
+				</content>
+			</chapter>
+			<chapter id="4" datepublic="12-08-2024">
+				<chapter-title>
+					See You Again
+				</chapter-title>
+				<content>
+					Hẹn gặp lại
+				</content>
+			</chapter>
+		</chapters>
+	</book>
+	<book bookId="289ec687-b673-4e03-968e-17c688147dd5" datepublic="12-08-2024">
+		<title>
+			Xin chào
+		</title>
+		<other-title>
+			Doraemon
+		</other-title>
+		<authors>
+			<author>
+				Nhiều tác giả
+			</author>
+		</authors>
+		<description>
+			Gì gì đó
+		</description>
+		<chapters total="0" />
+	</book>
+</library>

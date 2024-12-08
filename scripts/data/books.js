@@ -19,6 +19,7 @@ export function setLibraryToStorage(books) {
   }
 }
 
+// Sort Function
 export function sortObjectsByKey(list, key, ascending = true) {
   return list.sort((a, b) => {
     // Lấy giá trị của thuộc tính
@@ -89,6 +90,7 @@ export function searchBookList(searchString) {
   return bookList;
 }
 
+// Get function
 export function getBook(bookId) {
   for (const book of library) {
     if (book.bookId === bookId) {
@@ -116,6 +118,7 @@ export function getContent(bookId, chapterId) {
   return item;
 }
 
+//Need API
 export function removeBook(bookId) {
   fetch('http://127.0.0.1:5000/delete', {
     method: 'POST',
@@ -191,6 +194,8 @@ export function updateLibrary() {
         }
       });
       setLibraryToStorage(newLibrary);
+      library = newLibrary;
+      allBooks = newLibrary;
     })
     .catch(err => console.log(err));
 }
