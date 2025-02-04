@@ -120,6 +120,7 @@ def updateBook():
     return jsonify({"status": "Update Successfully"})
   except Exception as e:
     print("Không thể cập nhật")
+    print(e)
     return jsonify({"Error": "Cannot update"})
 
 @app.route('/addNewChapter', methods=["POST"])
@@ -128,7 +129,7 @@ def addNewChapter():
   id = data.get("bookId")
   title = data.get("title")
   content = data.get("content")
-
+  print(id)
   try:
     root = tree.getroot()
     element = root.xpath(f"//ns:book[@bookId='{id}']", namespaces=ns)[0]

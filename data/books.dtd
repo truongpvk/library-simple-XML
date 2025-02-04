@@ -1,0 +1,9 @@
+<!ELEMENT Library (Book*)>
+
+<!ELEMENT Book (Title, Author, Year, Genre)>
+<!ATTLIST Book id ID #REQUIRED>
+
+<!ELEMENT Title (#PCDATA)>
+<!ELEMENT Author (#PCDATA)>
+<!ELEMENT Year (#PCDATA)>
+<!ELEMENT Genre (#PCDATA)>
